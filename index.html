@@ -3,44 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photobooth by Dev</title>
+    <title>Photobooth Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="photobooth-container">
-        <h1>🎪 PHOTOBOOTH FUN</h1>
-        
-        <div id="camera-container">
-            <video id="camera-view" autoplay playsinline></video>
-            <div id="countdown">3</div>
-        </div>
-        
-        <div id="filters">
-            <div class="filter-option" data-filter="none">
-                <div class="filter-preview" style="filter: none;"></div>
-                <div>Bình thường</div>
+    <div id="app">
+        <header>
+            <h1>📸 PHOTOBOOTH PRO</h1>
+            <div id="camera-controls">
+                <button id="switch-camera">🔄 Đổi Camera</button>
+                <span id="camera-status">Đang khởi động...</span>
             </div>
-            <div class="filter-option" data-filter="grayscale(100%)">
-                <div class="filter-preview" style="filter: grayscale(100%);"></div>
-                <div>Đen trắng</div>
+        </header>
+
+        <main>
+            <div id="camera-container">
+                <video id="camera-view" autoplay playsinline></video>
+                <div id="countdown"></div>
+                <div id="camera-error" class="hidden"></div>
             </div>
-            <div class="filter-option" data-filter="sepia(100%)">
-                <div class="filter-preview" style="filter: sepia(100%);"></div>
-                <div>Sepia</div>
+
+            <div id="filters">
+                <div class="filter-option" data-filter="none">
+                    <div class="filter-preview"></div>
+                    <span>Gốc</span>
+                </div>
+                <div class="filter-option" data-filter="grayscale(100%)">
+                    <div class="filter-preview"></div>
+                    <span>Đen trắng</span>
+                </div>
+                <div class="filter-option" data-filter="sepia(100%)">
+                    <div class="filter-preview"></div>
+                    <span>Sepia</span>
+                </div>
+                <div class="filter-option" data-filter="hue-rotate(90deg)">
+                    <div class="filter-preview"></div>
+                    <span>Màu neon</span>
+                </div>
             </div>
-            <div class="filter-option" data-filter="hue-rotate(90deg)">
-                <div class="filter-preview" style="filter: hue-rotate(90deg);"></div>
-                <div>Màu neon</div>
+
+            <div id="controls">
+                <button id="capture-btn">CHỤP ẢNH</button>
+                <button id="multi-btn">CHỤP LIÊN HOÀN (4 ẢNH)</button>
             </div>
-        </div>
-        
-        <div id="controls">
-            <button id="capture-btn">CHỤP ẢNH</button>
-            <button id="multi-btn">CHỤP LIÊN HOÀN (4 ẢNH)</button>
-        </div>
-        
-        <h2>BỘ SƯU TẬP</h2>
-        <div id="gallery"></div>
+        </main>
+
+        <section id="gallery-section">
+            <h2>🎞️ BỘ SƯU TẬP</h2>
+            <div id="gallery"></div>
+        </section>
+    </div>
+
+    <div id="loading">
+        <div class="spinner"></div>
+        <p>Đang khởi tạo camera...</p>
     </div>
 
     <script src="script.js"></script>
