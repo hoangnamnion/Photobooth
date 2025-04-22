@@ -1,0 +1,141 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+#photobooth-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+#camera-view {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    border: 3px solid #ddd;
+    border-radius: 5px;
+    background: #000;
+}
+
+#controls {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    background: #4a6bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background: #3a5bef;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+#countdown {
+    font-size: 72px;
+    color: #ff4757;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    display: none;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.photo-item {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #eee;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#camera-container {
+    position: relative;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+#filters {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-option {
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.filter-option:hover {
+    transform: scale(1.05);
+}
+
+.filter-preview {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background: #ddd;
+    margin: 0 auto 5px;
+    transition: border-color 0.3s;
+}
+
+.filter-option:hover .filter-preview {
+    border-color: #4a6bff;
+}
+
+.filter-option.active .filter-preview {
+    border-color: #4a6bff;
+    box-shadow: 0 0 0 2px rgba(74, 107, 255, 0.3);
+}
