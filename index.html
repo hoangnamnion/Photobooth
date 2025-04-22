@@ -4,109 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photobooth by Dev</title>
-    <style>
-        /* CSS */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        #photobooth-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-        #camera-view {
-            width: 100%;
-            max-width: 640px;
-            height: auto;
-            border: 3px solid #ddd;
-            border-radius: 5px;
-            background: #000;
-        }
-        #controls {
-            margin: 20px 0;
-        }
-        button {
-            background: #4a6bff;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            margin: 0 10px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        button:hover {
-            background: #3a5bef;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
-        }
-        #countdown {
-            font-size: 72px;
-            color: #ff4757;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
-            display: none;
-        }
-        #gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 15px;
-        }
-        .photo-item {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            border: 2px solid #eee;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .photo-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        #camera-container {
-            position: relative;
-            margin: 0 auto;
-            width: fit-content;
-        }
-        .filter-option {
-            display: inline-block;
-            margin: 10px;
-            cursor: pointer;
-        }
-        .filter-preview {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-            border: 2px solid transparent;
-        }
-        .filter-preview:hover {
-            border-color: #4a6bff;
-        }
-        #filters {
-            margin: 20px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="photobooth-container">
@@ -118,121 +16,33 @@
         </div>
         
         <div id="filters">
-            <div class="filter-option" onclick="applyFilter('none')">
-                <img src="https://via.placeholder.com/50" class="filter-preview" style="filter: none;">
+            <div class="filter-option" data-filter="none">
+                <div class="filter-preview" style="filter: none;"></div>
                 <div>Bình thường</div>
             </div>
-            <div class="filter-option" onclick="applyFilter('grayscale(100%)')">
-                <img src="https://via.placeholder.com/50" class="filter-preview" style="filter: grayscale(100%);">
+            <div class="filter-option" data-filter="grayscale(100%)">
+                <div class="filter-preview" style="filter: grayscale(100%);"></div>
                 <div>Đen trắng</div>
             </div>
-            <div class="filter-option" onclick="applyFilter('sepia(100%)')">
-                <img src="https://via.placeholder.com/50" class="filter-preview" style="filter: sepia(100%);">
+            <div class="filter-option" data-filter="sepia(100%)">
+                <div class="filter-preview" style="filter: sepia(100%);"></div>
                 <div>Sepia</div>
             </div>
-            <div class="filter-option" onclick="applyFilter('hue-rotate(90deg)')">
-                <img src="https://via.placeholder.com/50" class="filter-preview" style="filter: hue-rotate(90deg);">
+            <div class="filter-option" data-filter="hue-rotate(90deg)">
+                <div class="filter-preview" style="filter: hue-rotate(90deg);"></div>
                 <div>Màu neon</div>
             </div>
         </div>
         
         <div id="controls">
-            <button id="capture-btn" onclick="startCountdown()">CHỤP ẢNH</button>
-            <button id="multi-btn" onclick="takeMultiPhotos(4)">CHỤP LIÊN HOÀN (4 ẢNH)</button>
+            <button id="capture-btn">CHỤP ẢNH</button>
+            <button id="multi-btn">CHỤP LIÊN HOÀN (4 ẢNH)</button>
         </div>
         
         <h2>BỘ SƯU TẬP</h2>
         <div id="gallery"></div>
     </div>
 
-    <script>
-        // JavaScript
-        const cameraView = document.getElementById("camera-view");
-        const countdown = document.getElementById("countdown");
-        const gallery = document.getElementById("gallery");
-        let currentFilter = "none";
-        
-        // Khởi động camera
-        function initCamera() {
-            navigator.mediaDevices.getUserMedia({ 
-                video: { 
-                    width: { ideal: 1280 }, 
-                    height: { ideal: 720 }, 
-                    facingMode: "user" 
-                }, 
-                audio: false 
-            })
-            .then(stream => {
-                cameraView.srcObject = stream;
-            })
-            .catch(err => {
-                console.error("Lỗi camera:", err);
-                alert("Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập!");
-            });
-        }
-        
-        // Đếm ngược chụp ảnh
-        function startCountdown(seconds = 3) {
-            countdown.style.display = "block";
-            let counter = seconds;
-            
-            const timer = setInterval(() => {
-                countdown.textContent = counter;
-                counter--;
-                
-                if (counter < 0) {
-                    clearInterval(timer);
-                    countdown.style.display = "none";
-                    capturePhoto();
-                }
-            }, 1000);
-        }
-        
-        // Chụp ảnh
-        function capturePhoto() {
-            const canvas = document.createElement("canvas");
-            canvas.width = cameraView.videoWidth;
-            canvas.height = cameraView.videoHeight;
-            const ctx = canvas.getContext("2d");
-            
-            // Áp dụng filter
-            ctx.filter = currentFilter;
-            ctx.drawImage(cameraView, 0, 0, canvas.width, canvas.height);
-            
-            // Tạo ảnh và thêm vào gallery
-            const photo = new Image();
-            photo.src = canvas.toDataURL("image/png");
-            photo.className = "photo-item";
-            
-            // Tạo nút tải ảnh
-            photo.onclick = function() {
-                const link = document.createElement("a");
-                link.href = this.src;
-                link.download = `photobooth_${new Date().getTime()}.png`;
-                link.click();
-            };
-            
-            gallery.appendChild(photo);
-        }
-        
-        // Chụp nhiều ảnh liên tiếp
-        function takeMultiPhotos(total) {
-            let count = 0;
-            const interval = setInterval(() => {
-                startCountdown(2);
-                count++;
-                if (count >= total) clearInterval(interval);
-            }, 3000);
-        }
-        
-        // Áp dụng bộ lọc
-        function applyFilter(filter) {
-            currentFilter = filter;
-            cameraView.style.filter = filter;
-        }
-        
-        // Khởi động ứng dụng
-        window.onload = initCamera;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
