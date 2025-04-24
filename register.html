@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký thành viên | PhotoBooth Hoàng Nam</title>
     <style>
         * {
@@ -14,7 +14,7 @@
 
         body {
             background: #1a1a1a;
-            min-height: 100vh; /* Sửa lại dòng này */
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -138,13 +138,9 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                align-items: flex-start;
-                min-height: auto;
-                height: auto;
-            }
             .register-container {
-                margin: 40px 0;
+                padding: 30px 20px;
+                margin: 20px;
             }
         }
 
@@ -168,18 +164,18 @@
         <form id="registerForm">
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required autocomplete="off" autocorrect="off" spellcheck="false">
+                <input type="email" id="email" name="email" required>
             </div>
             
             <div class="input-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" required autocomplete="off">
+                <input type="password" id="password" name="password" required>
                 <span class="password-toggle" onclick="togglePassword('password')">👁️</span>
             </div>
 
             <div class="input-group">
                 <label for="confirmPassword">Xác nhận mật khẩu</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="off">
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
                 <span class="password-toggle" onclick="togglePassword('confirmPassword')">👁️</span>
             </div>
             
@@ -279,13 +275,13 @@
                 transactions: [],
                 createdAt: new Date().toISOString()
             };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
             alert('Đăng ký thành công! Vui lòng đăng nhập.');
             window.location.href = '/login.html';
-        }); localStorage.setItem('users', JSON.stringify(users));
-    </script>
-</body>     alert('Đăng ký thành công! Vui lòng đăng nhập.');
-</html>     window.location.href = '/login.html';
         });
     </script>
 </body>
-</html>
+</html> 
