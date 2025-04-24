@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | PhotoBooth Hoàng Nam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .admin-login-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-logo {
+            width: 120px;
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 16px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: #fff;
+            opacity: 0.6;
+        }
+
+        .password-toggle:hover {
+            opacity: 1;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .security-info {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .security-info i {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 480px) {
+            .admin-login-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .register-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <img src="/images/logoo.html" alt="Admin Logo" class="admin-logo">
+        <h1>Đăng nhập Admin</h1>
+        
+        <form id="adminLoginForm">
+            <div class="input-group">
+                <label for="adminEmail">Email</label>
+                <input type="email" id="adminEmail" name="adminEmail" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="adminPassword">Mật khẩu</label>
+                <input type="password" id="adminPassword" name="adminPassword" required>
+                <span class="password-toggle" onclick="togglePassword()">👁️</span>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <button type="submit" class="login-btn">ĐĂNG NHẬP</button>
+        </form>
+
+        <button class="register-btn" onclick="showRegisterForm()">Đăng ký tài khoản mới</button>
+        
+        <div class="security-info">
+            <i>🔒</i> Đây là khu vực quản trị. Vui lòng đảm bảo bạn đã đăng xuất sau khi sử dụng.
+        </div>
+    </div>
+
+    <!-- Form đăng ký -->
+    <div class="admin-login-container" id="registerForm" style="display: none;">
+        <img src="/images/logoo.html" alt="Admin Logo" class="admin-logo">
+        <h1>Đăng ký tài khoản Admin</h1>
+        
+        <form id="adminRegisterForm">
+            <div class="input-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" name="registerEmail" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="registerPassword">Mật khẩu</label>
+                <input type="password" id="registerPassword" name="registerPassword" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Xác nhận mật khẩu</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <div class="input-group">
+                <label for="adminKey">Mã Admin (bắt buộc)</label>
+                <input type="password" id="adminKey" name="adminKey" required>
+            </div>
+            
+            <div class="error-message" id="registerErrorMessage"></div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="login-btn" onclick="showLoginForm()" style="background: #666;">Quay lại</button>
+                <button type="submit" class="login-btn">ĐĂNG KÝ</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="/scripts/security.js"></script>
+
+    <script>
+        // Kiểm tra nếu đã đăng nhập
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.isAdmin) {
+            window.location.href = '/admin/dashboard.html';
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('adminPassword');
+            const toggle = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggle.textContent = '👁️‍🗨️';
+            } else {
+                passwordInput.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Kiểm tra đăng nhập với tài khoản admin mặc định
+            if (email === 'caovannamdx@gmail.com' && password === 'Nam2005@') {
+                // Lấy danh sách người dùng
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                // Tìm hoặc tạo tài khoản admin
+                let adminUser = users.find(u => u.email === email);
+                if (!adminUser) {
+                    adminUser = {
+                        id: 1,
+                        email: email,
+                        password: password,
+                        status: 'active',
+                        balance: 0,
+                        isAdmin: true,
+                        transactions: [],
+                        createdAt: new Date().toISOString()
+                    };
+                    users.push(adminUser);
+                }
+                
+                // Tạo token xác thực
+                const authToken = Math.random().toString(36).substring(2) + Date.now().toString(36);
+                
+                // Lưu thông tin đăng nhập
+                const currentUser = {
+                    id: adminUser.id,
+                    email: adminUser.email,
+                    isAdmin: true,
+                    authToken: authToken
+                };
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                // Cập nhật token cho người dùng
+                adminUser.authToken = authToken;
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Chuyển hướng đến dashboard
+                window.location.href = '/admin/dashboard.html';
+            } else {
+                // Hiển thị lỗi
+                errorMessage.textContent = 'Sai email hoặc mật khẩu';
+                errorMessage.style.display = 'block';
+                document.getElementById('adminLoginForm').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('adminLoginForm').classList.remove('shake');
+                }, 500);
+            }
+        });
+
+        function showRegisterForm() {
+            document.getElementById('adminLoginForm').parentElement.style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('adminLoginForm').parentElement.style.display = 'block';
+        }
+
+        document.getElementById('adminRegisterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const adminKey = document.getElementById('adminKey').value;
+            const errorMessage = document.getElementById('registerErrorMessage');
+
+            // Kiểm tra mật khẩu
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Mật khẩu không khớp!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Kiểm tra mã admin
+            if (adminKey !== 'Nam2005@') {
+                errorMessage.textContent = 'Mã Admin không đúng!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Lấy danh sách người dùng
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Kiểm tra email đã tồn tại
+            if (users.some(u => u.email === email)) {
+                errorMessage.textContent = 'Email này đã được sử dụng!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Tạo tài khoản admin mới
+            const newAdmin = {
+                id: users.length + 1,
+                email: email,
+                password: password,
+                status: 'active',
+                balance: 0,
+                isAdmin: true,
+                transactions: [],
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newAdmin);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Đăng ký thành công! Vui lòng đăng nhập.');
+            showLoginForm();
+        });
+    </script>
+</body>
+</html> 

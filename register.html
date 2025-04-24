@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký thành viên | PhotoBooth Hoàng Nam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 16px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: #fff;
+            opacity: 0.6;
+        }
+
+        .password-toggle:hover {
+            opacity: 1;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .register-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .register-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <img src="/icon/logo.png" alt="Logo" class="logo">
+        <h1>Đăng ký thành viên</h1>
+        
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required>
+                <span class="password-toggle" onclick="togglePassword('password')">👁️</span>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Xác nhận mật khẩu</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span class="password-toggle" onclick="togglePassword('confirmPassword')">👁️</span>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <button type="submit" class="register-btn">ĐĂNG KÝ</button>
+        </form>
+
+        <div class="login-link">
+            Đã có tài khoản? <a href="/login.html">Đăng nhập</a>
+        </div>
+    </div>
+
+    <script src="/scripts/security.js"></script>
+
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggle = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggle.textContent = '👁️‍🗨️';
+            } else {
+                passwordInput.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Reset error message
+            errorMessage.style.display = 'none';
+            
+            // Kiểm tra mật khẩu
+            if (password.length < 6) {
+                errorMessage.textContent = 'Mật khẩu phải có ít nhất 6 ký tự!';
+                errorMessage.style.display = 'block';
+                document.getElementById('registerForm').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('registerForm').classList.remove('shake');
+                }, 500);
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Mật khẩu không khớp!';
+                errorMessage.style.display = 'block';
+                document.getElementById('registerForm').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('registerForm').classList.remove('shake');
+                }, 500);
+                return;
+            }
+
+            // Kiểm tra định dạng email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage.textContent = 'Email không hợp lệ!';
+                errorMessage.style.display = 'block';
+                document.getElementById('registerForm').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('registerForm').classList.remove('shake');
+                }, 500);
+                return;
+            }
+
+            // Lấy danh sách người dùng
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Kiểm tra email đã tồn tại
+            const existingEmail = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+            if (existingEmail) {
+                errorMessage.textContent = 'Email này đã được sử dụng!';
+                errorMessage.style.display = 'block';
+                document.getElementById('registerForm').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('registerForm').classList.remove('shake');
+                }, 500);
+                return;
+            }
+
+            // Tạo tài khoản mới
+            const newUser = {
+                id: users.length + 1,
+                email: email,
+                password: password,
+                key: 'hoangnam' + Math.floor(Math.random() * 1000).toString().padStart(3, '0'),
+                status: 'active',
+                balance: 0,
+                isAdmin: false,
+                transactions: [],
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Đăng ký thành công! Vui lòng đăng nhập.');
+            window.location.href = '/login.html';
+        });
+    </script>
+</body>
+</html> 
