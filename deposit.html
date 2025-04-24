@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp tiền | Hoàng Nam Nion</title>
+    <link rel="shortcut icon" href="/icon/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/layout.css"> <!-- Reuse layout styles -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .deposit-container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .deposit-container h1 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .deposit-info p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .deposit-info strong {
+            color: #333;
+        }
+
+        .user-key {
+            background-color: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6b6b;
+            display: inline-block;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border: 1px dashed #ff6b6b;
+        }
+
+        .qr-code-container {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #qrCode {
+            max-width: 250px;
+            height: auto;
+            border: 5px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 5px;
+            background: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .action-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.2);
+        }
+
+        .copy-button {
+            background: #6c757d;
+        }
+
+        .copy-button:hover {
+            background: #5a6268;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -70px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Header -->
+    <header id="header">
+        <!-- Header content will be loaded by header.js -->
+    </header>
+    <script src="/scripts/partials/header.js"></script>
+
+    <main>
+        <div class="deposit-container">
+            <h1>Thông tin nạp tiền</h1>
+            <div class="deposit-info">
+                <p>Để nạp tiền vào tài khoản <strong id="userEmail"></strong>, vui lòng chuyển khoản theo thông tin dưới đây:</p>
+                <p><strong>Ngân hàng:</strong> MBBANK</p>
+                <p><strong>Số tài khoản:</strong> 99992005123456</p>
+                <p><strong>Chủ tài khoản:</strong> CAO VĂN NAM</p>
+                <p><strong>Nội dung chuyển khoản (BẮT BUỘC):</strong></p>
+                <div class="tooltip">
+                    <span class="user-key" id="userKey"></span>
+                    <span class="tooltiptext" id="copyTooltip">Sao chép nội dung</span>
+                </div>
+                <p><em>(Vui lòng nhập chính xác nội dung chuyển khoản để hệ thống xử lý tự động)</em></p>
+            </div>
+
+            <div class="qr-code-container">
+                <p><strong>Hoặc quét mã VietQR:</strong></p>
+                <img id="qrCode" src="" alt="VietQR Code">
+            </div>
+
+            <div class="action-buttons">
+                 <button class="action-button copy-button" id="copyKeyBtn">Sao chép nội dung</button>
+                 <a href="/" class="action-button">Quay về trang chủ</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer -->
+    <footer id="footer">
+        <!-- Footer content will be loaded by footer.js -->
+    </footer>
+    <script src="/scripts/partials/footer.js"></script>
+
+    <script src="/scripts/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script src="/scripts/auth.js"></script>
+
+    <script>
+        // Kiểm tra đăng nhập khi trang được tải
+        if (!checkLogin()) {
+            window.location.href = '/login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const currentUserData = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (!currentUserData || !currentUserData.isLoggedIn) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            const user = users.find(u => u.id === currentUserData.id);
+
+            if (!user) {
+                alert('Không tìm thấy thông tin người dùng.');
+                localStorage.removeItem('currentUser');
+                window.location.href = '/login.html';
+                return;
+            }
+
+            const userEmailEl = document.getElementById('userEmail');
+            const userKeyEl = document.getElementById('userKey');
+            const qrCodeEl = document.getElementById('qrCode');
+            const copyKeyBtn = document.getElementById('copyKeyBtn');
+            const copyTooltip = document.getElementById('copyTooltip');
+
+            const userKey = user.key || 'N/A';
+            const bankId = '970422'; // MBBANK
+            const accountNo = '99992005123456';
+            const accountName = 'CAO VAN NAM';
+
+            userEmailEl.textContent = user.email;
+            userKeyEl.textContent = userKey;
+
+            if (userKey !== 'N/A') {
+                // Tạo nội dung chuyển khoản theo định dạng VietQR
+                const qrContent = `bank_transfer|${bankId}|${accountNo}|${accountName}|${userKey}`;
+                
+                // Tạo mã QR bằng thư viện QRCode.js
+                const qr = qrcode(0, 'M');
+                qr.addData(qrContent);
+                qr.make();
+                
+                // Tạo ảnh QR code
+                const qrImage = qr.createImgTag(10, 0);
+                qrCodeEl.outerHTML = qrImage;
+                qrCodeEl.style.display = 'block';
+            } else {
+                qrCodeEl.alt = 'Không thể tạo mã QR do thiếu key người dùng.';
+                qrCodeEl.style.display = 'none';
+                copyKeyBtn.disabled = true;
+            }
+
+            // Copy key to clipboard
+            copyKeyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(userKey).then(() => {
+                    copyTooltip.textContent = 'Đã sao chép!';
+                    setTimeout(() => {
+                        copyTooltip.textContent = 'Sao chép nội dung'; // Reset tooltip text
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Không thể sao chép: ', err);
+                    copyTooltip.textContent = 'Lỗi sao chép';
+                });
+            });
+        });
+
+        // Function to handle logout (assuming it exists in layout.js or header.js)
+         function logout() {
+            // Xóa thông tin đăng nhập
+            localStorage.removeItem('currentUser');
+            // Chuyển hướng về trang đăng nhập
+            window.location.href = '/login.html';
+        }
+    </script>
+</body>
+</html> 

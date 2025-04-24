@@ -1,0 +1,36 @@
+{
+    "name": "PhotoBooth Hoàng Nam",
+    "short_name": "PhotoBooth",
+    "description": "Ứng dụng chụp ảnh và quản lý tài khoản",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ff6b6b",
+    "icons": [
+        {
+            "src": "/icon/logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "permissions": [
+        "camera",
+        "storage"
+    ],
+    "content_security_policy": {
+        "default-src": "'self'",
+        "script-src": "'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+        "style-src": "'self' 'unsafe-inline'",
+        "img-src": "'self' data: https:",
+        "connect-src": "'self'",
+        "font-src": "'self'",
+        "object-src": "'none'",
+        "media-src": "'self' blob:",
+        "frame-src": "'none'"
+    }
+} 

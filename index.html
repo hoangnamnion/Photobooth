@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'self' blob:; frame-src 'none'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="X-Content-Type-Options" content="nosniff">
+    <meta name="X-Frame-Options" content="DENY">
+    <meta name="X-XSS-Protection" content="1; mode=block">
+    <meta name="Permissions-Policy" content="camera=(self), microphone=(), geolocation=()">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/icon/favicon.png">
+    <link rel="apple-touch-icon" href="/icon/logo.png">
+    <meta name="theme-color" content="#ff6b6b">
+
+    <!-- Title -->
+    <title>
+        Mẫu 4 ảnh dọc | Mèo Béo Studio
+    </title>
+
+    <!-- Meta Description for SEO -->
+    <meta name="description"
+    content="Hoàng Nam Nion - Trải nghiệm chụp photobooth online độc đáo">
+
+    <!-- Meta Keywords -->
+    <meta name="keywords"
+    content="Tất Cả Free ">
+
+    <!-- Meta Author -->
+    <meta name="author" content="Hoàng Nam Nion">
+
+    <!-- Meta for Facebook Open Graph -->
+    <meta property="og:title" content="Hoàng Nam Nion - Photobooth Online Sáng Tạo ">
+    <meta property="og:description"
+    content="">
+    <meta property="og:image" content="https://meobeostudio.com/icon/logo.jpg">
+    <meta property="og:url" content="Free Không Lấy Phí">
+    <meta property="og:type" content="website">
+
+    <!-- Meta for Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hoàng Nam Nion - Chụp Photobooth Online & Xem Tarot Online">
+    <meta name="twitter:description"
+    content="Khám phá niềm vui chụp ảnh với photobooth online ">
+    <meta name="twitter:image" content="https://meobeostudio.com/icon/logo.jpg">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/icon/favicon.png" type="image/x-icon">
+
+    <!-- Custom Stylesheets -->
+    <link rel="stylesheet" href="css/layout.css">
+
+    <meta name="google-adsense-account" content="ca-pub-8758740316724192">
+
+    <script async src="https://www.googletagmanager.com/gtag/scripts?id=G-HRVTHQCGLC"></script>
+    <script nonce="Ir3XLmgiOltPKaYUzkz4rw==">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('scripts', new Date());
+
+        gtag('config', 'G-HRVTHQCGLC');
+    </script>
+
+</head>
+
+<body>
+    <style>
+    header {
+        width: 100%;
+        position: relative;
+        background-color: transparent;
+        padding: 10px 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    #app-logo {
+        height: 40px;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+        user-select: none;
+    }
+
+    #app-logo:hover {
+        transform: scale(1.1);
+    }
+
+    /* Menu trên desktop */
+    #header-button-container {
+        margin-left: auto;
+        display: flex;
+        gap: 20px;
+    }
+
+    #header-button-container a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    #header-button-container a:hover {
+        text-decoration: underline;
+    }
+
+    .balance-display {
+        color: #4CAF50;
+        font-size: 15px;
+        font-weight: 600;
+        margin-right: 20px;
+        display: block;
+        text-align: right;
+    }
+
+    .balance-label {
+        color: #333;
+        font-size: 13px;
+        margin-right: 5px;
+    }
+
+    .mobile-menu-button {
+        width: 40px;
+        height: 40px;
+        display: none;
+        margin-left: auto;
+        border: none;
+        cursor: pointer;
+        background-color: transparent !important;
+        padding: 0 !important;
+    }
+
+    .mobile-menu-button svg {
+        width: 100%;
+        height: 100%;
+        fill: #333;
+    }
+
+    #close-menu {
+        display: none;
+    }
+
+    @media (max-width: 1000px) {
+        #header-button-container {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('/images/chill.jpg') no-repeat center center fixed;
+            background-size: cover;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 9999;
+            gap: 20px;
+        }
+
+        #header-button-container.active {
+            transform: translateX(0);
+        }
+
+        #header-button-container a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .mobile-menu-button {
+            display: block;
+        }
+
+        #close-menu {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            margin-left: auto;
+            margin-bottom: 50px;
+            padding: 0 !important;
+        }
+
+        #close-menu svg {
+            fill: #fff;
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            padding: 5px 10px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: background-color 0.3s ease-in-out;
+        }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    #captureBtn:active {
+      transform: scale(0.85);
+    }
+
+    #captureBtn:not(:active) {
+      transform: scale(1);
+    }
+
+    /* Countdown styles */
+    #countdown {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      transform: translate(-50%, -50%);
+      font-size: 0;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .countdown-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff6b6b;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      animation: countdownPulse 1s ease-in-out infinite;
+      pointer-events: none;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes countdownPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+    }
+
+    /* Flash effect */
+    .flash {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99;
+      transition: opacity 0.3s ease-out;
+    }
+
+    @keyframes flash {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+</style>
+
+<header id="header">
+    <img src="/icon/logo.png" alt="App logo" id="app-logo">
+    <!-- Nút hamburger hiển thị trên mobile -->
+    <button class="mobile-menu-button" id="mobile-menu-toggle" aria-label="Mở menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
+        </svg>
+    </button>
+
+    <div id="header-button-container">
+        <button id="close-menu" aria-label="Close mobile menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>        
+        </button>
+        
+        <a href="/photobooth">Photobooth</a>
+        <a href="/profile">Trang cá nhân</a>
+        <a href="/deposit">Nạp tiền</a>
+        <a href="#" onclick="logout()">Đăng xuất</a>
+        <div class="balance-display">
+            <span class="balance-label">Số dư:</span>
+            <span id="headerBalance">0đ</span>
+        </div>
+    </div>
+</header>
+
+<script src="/scripts/partials/header.js"></script>
+
+    <main>
+        <link rel="stylesheet" href="css/4_images.css">
+
+<meta name="robots" content="noindex">
+
+<div class="cute-container">
+  <h1 style="font-size: 30px; text-align: center; margin-bottom: 20px;">PhotoBooth Hoàng Nam</h1>
+
+  <div style="position: relative; width: 100%; max-width: 600px; margin: 20px auto;">
+    <video id="video" autoplay playsinline muted style="width: 100%; border-radius: 20px; overflow: hidden; border: 4px solid #ff6b6b; box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);"></video>
+    <div id="countdown"></div>
+    <div id="spinner"></div>
+  </div>
+
+  <div style="display: flex; gap: 15px; position: relative; margin: 10px auto; width: fit-content; flex-wrap: wrap; justify-content: center; align-items: center;">
+    <div style="display: flex; gap: 15px;">
+      <button class="function-button" id="uploadBtn" onclick="document.getElementById('uploadInput').click()">Upload Ảnh</button>
+      <input type="file" id="uploadInput" accept="image/*" multiple style="display: none;">
+    </div>
+
+    <button class="function-button" id="captureBtn" onclick="capturePhoto()" style="width: 80px; height: 80px; border-radius: 50%; background-color: #ff6b6b; color: white; font-size: 16px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);">Chụp</button>
+
+    <div style="display: flex; gap: 15px;">
+      <button class="function-button" id="flipCamBtn" onclick="flipCamera()">Lật Cam</button>
+      <button class="function-button" id="switchCamBtn" onclick="switchCamera()">Đổi Cam</button>
+    </div>
+  </div>
+
+  <div class="option-container">
+    <label for="captureCount">Chọn số lượng ảnh chụp tự động:</label>
+    <select id="captureCount">
+      <option value="4" selected>4</option>
+      <option value="8">8</option>
+    </select>
+  </div>
+  
+  <div class="option-container">
+    <label for="captureTime">Chọn thời gian chụp mỗi ảnh (giây):</label>
+    <select id="captureTime">
+      <option value="0" selected>Chụp luôn</option>
+      <option value="3">3</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+  </div>
+
+  <div style="margin-top: 15px;">
+    <h2>Ảnh Preview:</h2>
+    <p>Nhấn vào ảnh để chọn hoặc hủy chọn ảnh muốn xuất (chọn đúng 4 ảnh).<br>
+      Lưu ý: Ảnh được upload sẽ hiển thị chữ "UPLOAD" và không có video!
+    </p>
+    <div id="previewImages"></div>
+  </div>
+
+  <!-- Phần chọn Frame: hiển thị dãy hình ảnh -->
+  <div id="frameOptionsContainer" style="margin-top: 15px;">
+    <h3>Chọn Frame (chỉ ảnh xuất có frame, video xuất không có frame):</h3>
+    <div id="frameOptions">
+      <img src="/images/basic-1.png" alt="Basic 1" class="frame-option selected" data-frame-url="/images/basic-1.png">
+      <img src="/images/basic-2.png" alt="Basic 2" class="frame-option" data-frame-url="/images/basic-2.png">
+      <img src="/images/basic-3.png" alt="Basic 3" class="frame-option" data-frame-url="/images/basic-3.png">
+      <img src="/images/basic-4.png" alt="Basic 4" class="frame-option" data-frame-url="/images/basic-4.png">
+      <img src="/images/basic-5.png" alt="Basic 5" class="frame-option" data-frame-url="/images/basic-5.png">
+
+      <img src="/images/cute-1.png" alt="Cute 1" class="frame-option" data-frame-url="/images/cute-1.png">
+      <img src="/images/cute-2.png" alt="Cute 2" class="frame-option" data-frame-url="/images/cute-2.png">
+      <img src="/images/cute-3.png" alt="Cute 3" class="frame-option" data-frame-url="/images/cute-3.png">
+      <img src="/images/cute-4.png" alt="Cute 4" class="frame-option" data-frame-url="/images/cute-4.png">
+      <img src="/images/cute-5.png" alt="Cute 5" class="frame-option" data-frame-url="/images/cute-5.png">
+      <img src="/images/cute-6.png" alt="Cute 6" class="frame-option" data-frame-url="/images/cute-6.png">
+      <img src="/images/cute-7.png" alt="Cute 7" class="frame-option" data-frame-url="/images/cute-7.png">
+
+
+      <img src="/images/vietnam-1.png" alt="Vietnam 1" class="frame-option" data-frame-url="/images/vietnam-1.png">
+      <img src="/images/vietnam-2.png" alt="Vietnam 2" class="frame-option" data-frame-url="/images/vietnam-2.png">
+    </div>
+  </div>
+
+  <!-- Khu vực xem trước kết quả ghép -->
+  <div id="templatePreviewContainer">
+    <h2 style="font-size: 25px; width: 100%; text-align: center;">Xem trước kết quả</h2>
+    <canvas id="templatePreview" style="border: none;"></canvas>
+  </div>
+
+  <div style="width: fit-content; margin: 10px auto; display: flex; gap: 15px;">
+    <button class="function-button" id="exportBtn">Xuất ảnh (Ghép)</button>
+    <button class="function-button" id="exportVideoBtn">Xuất video (Ghép)</button>
+  </div>
+
+  <audio id="captureSound" src="/audio/capture_sound.mp3"></audio>
+
+  <!-- Modal xuất video -->
+  <div id="videoExportModal" class="modal">
+    <div class="modal-content">
+      <h2>Xuất video</h2>
+      <p id="modalMessage">
+        Xuất video sẽ mất 2000 đồng.<br>
+        <strong>Lưu ý:</strong> Video được xuất <u>không có frame</u>.<br>
+        Số dư hiện tại: <span id="currentBalance"></span> đồng.
+      </p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%; margin-top: 15px;">
+        <button class="function-button" id="youtubeSignupBtn">Đăng ký Youtube</button>
+        <button class="function-button" id="hihiBtn">Xin Admin :>>></button>
+        <button class="function-button" id="rechargeBtn">Nạp thêm</button>
+        <button class="function-button" id="confirmExportBtn">Đồng ý xuất</button>
+        <button class="function-button" id="cancelExportBtn">Từ chối xuất</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/4_images.js"></script>
+<script src="/scripts/balance.js"></script>
+    </main>
+
+    <style>
+    footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 50px;
+    }
+
+    #footer-logo {
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    .social-links {
+        position: relative;
+        display: flex;
+        gap: 10px;
+    }
+
+    .social-links a {
+        text-decoration: none;
+    }
+
+    .social-links a svg {
+        fill: #333;
+        width: 50px;
+        height: 50px;
+        transition: background .3s ease-in-out;
+        padding: 5px;
+        border-radius: 50%;
+    }
+
+    .social-links a:hover svg {
+        background-color: #333;
+        fill: #fff;
+    }
+
+    @media (max-width: 1000px) {
+        footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+            gap: 15px;
+        }
+    }
+</style>
+
+<footer>
+    <img alt="Footer logo" src="/icon/logo.png" id="footer-logo" aria-label="Go to Homepage">
+    <div class="social-links">
+        <a href="https://www.facebook.com/cao.vannam.26042k5" target="_blank" aria-label="Facebook Fanpage">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61563535470440" target="_blank" aria-label="Facebook Group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.5 12c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm1.5 1H8c-3.309 0-6 2.691-6 6v1h15v-1c0-3.309-2.691-6-6-6z"></path><path d="M16.604 11.048a5.67 5.67 0 0 0 .751-3.44c-.179-1.784-1.175-3.361-2.803-4.44l-1.105 1.666c1.119.742 1.8 1.799 1.918 2.974a3.693 3.693 0 0 1-1.072 2.986l-1.192 1.192 1.618.475C18.951 13.701 19 17.957 19 18h2c0-1.789-.956-5.285-4.396-6.952z"></path></svg>
+        </a>
+        <a href="https://www.youtube.com/@CaoVanNam-xn5mb" target="_blank" aria-label="YouTube Channel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21.593 7.203a2.506 2.506 0 0 0-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 0 0-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 0 0 1.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"></path></svg>
+        </a>
+        <a href="https://www.tiktok.com/@nam_26th4" aria-label="TikTok Channel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path></svg>
+        </a>
+        <a href="#" target="_blank" aria-label="Join our Discord">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.92 1.92 0 0 1-1.8 2z"></path></svg>
+        </a>
+    </div>
+</footer>
+
+<script src="/scripts/partials/footer.js"></script>
+</body>
+
+<script src="/scripts/layout.js"></script>
+<script src="/scripts/auth.js"></script>
+
+<script>
+    // Kiểm tra đăng nhập khi trang được tải
+    if (!checkLogin()) {
+        window.location.href = '/login.html';
+    }
+
+    // Hiển thị số tiền của người dùng
+    document.addEventListener('DOMContentLoaded', () => {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUserData = JSON.parse(localStorage.getItem('currentUser'));
+
+        if (currentUserData && currentUserData.isLoggedIn) {
+            const user = users.find(u => u.id === currentUserData.id);
+            if (user) {
+                const balanceElement = document.getElementById('headerBalance');
+                if (balanceElement) {
+                    balanceElement.textContent = `${user.balance.toLocaleString()}đ`;
+                }
+            }
+        }
+    });
+
+    // Thêm hàm đăng xuất
+    function logout() {
+        // Xóa thông tin đăng nhập
+        localStorage.removeItem('currentUser');
+        // Chuyển hướng về trang đăng nhập
+        window.location.href = '/login.html';
+    }
+
+    // Khởi tạo camera
+    let video = document.getElementById('video');
+    let currentStream = null;
+    let facingMode = "user"; // Mặc định là camera trước
+
+    async function initCamera() {
+        try {
+            // Dừng stream hiện tại nếu có
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+
+            // Yêu cầu quyền truy cập camera
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: facingMode,
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
+                },
+                audio: false
+            });
+
+            // Gán stream cho video element
+            video.srcObject = stream;
+            currentStream = stream;
+
+            // Đợi video sẵn sàng
+            video.onloadedmetadata = function() {
+                video.play();
+            };
+
+        } catch (err) {
+            console.error("Lỗi khi khởi tạo camera:", err);
+            alert("Không thể truy cập camera. Vui lòng kiểm tra quyền truy cập và thử lại.");
+        }
+    }
+
+    // Hàm chụp ảnh
+    function capturePhoto() {
+        if (!currentStream) {
+            alert("Vui lòng khởi tạo camera trước khi chụp ảnh!");
+            return;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.className = 'preview-image';
+        
+        const previewContainer = document.getElementById('previewImages');
+        previewContainer.appendChild(img);
+        
+        // Thêm sự kiện click để chọn/hủy chọn ảnh
+        img.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+    }
+
+    // Hàm lật camera
+    function flipCamera() {
+        if (!currentStream) {
+            alert("Vui lòng khởi tạo camera trước!");
+            return;
+        }
+        facingMode = facingMode === "user" ? "environment" : "user";
+        initCamera();
+    }
+
+    // Hàm đổi camera
+    async function switchCamera() {
+        try {
+            if (!currentStream) {
+                alert("Vui lòng khởi tạo camera trước!");
+                return;
+            }
+
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(device => device.kind === 'videoinput');
+            
+            if (videoDevices.length > 1) {
+                const currentDevice = currentStream.getVideoTracks()[0].getSettings().deviceId;
+                const currentIndex = videoDevices.findIndex(device => device.deviceId === currentDevice);
+                const nextIndex = (currentIndex + 1) % videoDevices.length;
+                
+                facingMode = { deviceId: { exact: videoDevices[nextIndex].deviceId } };
+                initCamera();
+            } else {
+                alert("Không tìm thấy camera thứ hai!");
+            }
+        } catch (err) {
+            console.error("Lỗi khi đổi camera:", err);
+            alert("Không thể chuyển đổi camera. Vui lòng thử lại.");
+        }
+    }
+
+    // Hàm xử lý upload ảnh
+    document.getElementById('uploadInput').addEventListener('change', function(e) {
+        const files = e.target.files;
+        const previewContainer = document.getElementById('previewImages');
+        
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = 'preview-image upload';
+                
+                previewContainer.appendChild(img);
+                
+                // Thêm sự kiện click để chọn/hủy chọn ảnh
+                img.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            }
+        }
+    });
+
+    // Thêm nút khởi tạo camera
+    const cameraInitBtn = document.createElement('button');
+    cameraInitBtn.className = 'function-button';
+    cameraInitBtn.textContent = 'Khởi tạo Camera';
+    cameraInitBtn.onclick = initCamera;
+    document.querySelector('.cute-container').insertBefore(cameraInitBtn, document.querySelector('.option-container'));
+
+    // Khởi tạo camera khi trang được tải
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hiển thị thông báo hướng dẫn
+        alert("Vui lòng nhấn nút 'Khởi tạo Camera' để bắt đầu sử dụng camera.");
+    });
+</script>
+
+</html>
