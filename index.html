@@ -834,6 +834,16 @@
             return false;
         }
     });
+
+    document.getElementById('exportBtn').addEventListener('click', function(e) {
+        e.preventDefault(); // Ngăn reload trang
+        // ...code xuất ảnh...
+    });
+
+    document.getElementById('exportVideoBtn').addEventListener('click', function(e) {
+        e.preventDefault(); // Ngăn reload trang
+        // ...code xuất video...
+    });
 </script>
 
 </html>
