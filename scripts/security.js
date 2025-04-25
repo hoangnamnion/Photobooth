@@ -42,14 +42,14 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Chặn mở DevTools bằng cách kiểm tra kích thước cửa sổ
-let lastWidth = window.innerWidth;
-let lastHeight = window.innerHeight;
-setInterval(function() {
-    if (window.innerWidth !== lastWidth || window.innerHeight !== lastHeight) {
-        if (window.innerWidth < lastWidth || window.innerHeight < lastHeight) {
-            window.location.reload();
-        }
-        lastWidth = window.innerWidth;
-        lastHeight = window.innerHeight;
-    }
-}, 1000); 
+// let lastWidth = window.innerWidth;
+// let lastHeight = window.innerHeight;
+// setInterval(function() {
+//     if (window.innerWidth !== lastWidth || window.innerHeight !== lastHeight) {
+//         if (window.innerWidth < lastWidth || window.innerHeight < lastHeight) {
+//             window.location.reload();
+//         }
+//         lastWidth = window.innerWidth;
+//         lastHeight = window.innerHeight;
+//     }
+// }, 1000);
