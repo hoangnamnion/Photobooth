@@ -625,7 +625,9 @@ async function mergeImages(images, frameUrl) {
     });
 }
 
-exportBtn.addEventListener("click", async () => {
+exportBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const selectedWrappers = previewImagesContainer.querySelectorAll(".preview-wrapper.selected");
     if (selectedWrappers.length !== 4) {
         alert("Bạn phải chọn chính xác 4 ảnh để xuất.");
@@ -717,120 +719,121 @@ async function mergeVideoWithFrame(videoData, frameUrl, duration) {
   });
 }
 
-// Sửa lại hàm xử lý xuất video
-exportVideoBtn.addEventListener("click", async () => {
-  const selectedWrappers = previewImagesContainer.querySelectorAll(".preview-wrapper.selected");
-  if (selectedWrappers.length !== 4) {
-    alert("Bạn phải chọn chính xác 4 video (qua ảnh preview) để xuất.");
-    return;
-  }
-
-  // Kiểm tra xem có ảnh nào có thuộc tính data-upload hay không
-  const hasUpload = Array.from(selectedWrappers).some(wrapper => {
-    const img = wrapper.querySelector("img");
-    return img.getAttribute("data-upload") === "true";
-  });
-  if (hasUpload) {
-    alert("Có ảnh được upload không có video. Vui lòng chọn lại hoặc chụp ảnh mới để xuất video.");
-    return;
-  }
-
-  showSpinner("Đang xử lý video...");
-  
-  try {
-    // Lấy video data từ các ảnh đã chọn
-    const selectedVideos = Array.from(selectedWrappers).map(wrapper => {
-      const img = wrapper.querySelector("img");
-      const index = parseInt(img.getAttribute("data-index"));
-      return videoSegments[index];
-    });
-
-    // Kiểm tra video data
-    if (!selectedVideos || selectedVideos.length === 0) {
-      throw new Error("Không có video data");
+exportVideoBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const selectedWrappers = previewImagesContainer.querySelectorAll(".preview-wrapper.selected");
+    if (selectedWrappers.length !== 4) {
+        alert("Bạn phải chọn chính xác 4 video (qua ảnh preview) để xuất.");
+        return;
     }
 
-    // Lấy thời gian countdown từ biến countdownTime
-    const countdownDuration = countdownTime;
-
-    // Ghép video với khung
-    const mergedVideoUrl = await mergeVideoWithFrame(selectedVideos[0], selectedFrameUrl, countdownDuration);
-
-    // Tạo video container
-    const videoContainer = document.createElement('div');
-    videoContainer.style.position = 'fixed';
-    videoContainer.style.top = '0';
-    videoContainer.style.left = '0';
-    videoContainer.style.width = '100%';
-    videoContainer.style.height = '100%';
-    videoContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
-    videoContainer.style.display = 'flex';
-    videoContainer.style.flexDirection = 'column';
-    videoContainer.style.justifyContent = 'center';
-    videoContainer.style.alignItems = 'center';
-    videoContainer.style.zIndex = '1000';
-
-    // Tạo video element
-    const videoElement = document.createElement('video');
-    videoElement.style.width = '500px';
-    videoElement.style.height = '350px';
-    videoElement.style.objectFit = 'cover';
-    videoElement.style.borderRadius = '20px';
-    videoElement.controls = true;
-    videoElement.autoplay = true;
-    videoElement.src = mergedVideoUrl;
-
-    // Tạo nút tải xuống
-    const downloadBtn = document.createElement('button');
-    downloadBtn.textContent = 'Tải video';
-    downloadBtn.style.marginTop = '20px';
-    downloadBtn.style.padding = '10px 20px';
-    downloadBtn.style.backgroundColor = '#ff6b6b';
-    downloadBtn.style.color = 'white';
-    downloadBtn.style.border = 'none';
-    downloadBtn.style.borderRadius = '5px';
-    downloadBtn.style.cursor = 'pointer';
-
-    // Tạo nút đóng
-    const closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Đóng';
-    closeBtn.style.position = 'absolute';
-    closeBtn.style.top = '20px';
-    closeBtn.style.right = '20px';
-    closeBtn.style.padding = '10px 20px';
-    closeBtn.style.backgroundColor = '#ff6b6b';
-    closeBtn.style.color = 'white';
-    closeBtn.style.border = 'none';
-    closeBtn.style.borderRadius = '5px';
-    closeBtn.style.cursor = 'pointer';
-
-    // Thêm các phần tử vào container
-    videoContainer.appendChild(videoElement);
-    videoContainer.appendChild(downloadBtn);
-    videoContainer.appendChild(closeBtn);
-    document.body.appendChild(videoContainer);
-
-    // Xử lý sự kiện tải xuống
-    downloadBtn.addEventListener('click', () => {
-      const a = document.createElement('a');
-      a.href = mergedVideoUrl;
-      a.download = 'video.webm';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    // Kiểm tra xem có ảnh nào có thuộc tính data-upload hay không
+    const hasUpload = Array.from(selectedWrappers).some(wrapper => {
+        const img = wrapper.querySelector("img");
+        return img.getAttribute("data-upload") === "true";
     });
+    if (hasUpload) {
+        alert("Có ảnh được upload không có video. Vui lòng chọn lại hoặc chụp ảnh mới để xuất video.");
+        return;
+    }
 
-    // Xử lý sự kiện đóng
-    closeBtn.addEventListener('click', () => {
-      document.body.removeChild(videoContainer);
-    });
+    showSpinner("Đang xử lý video...");
     
-    hideSpinner();
-  } catch (error) {
-    hideSpinner();
-    console.error("Lỗi khi xử lý video:", error);
-    alert("Có lỗi xảy ra khi xử lý video: " + error.message);
-  }
+    try {
+        // Lấy video data từ các ảnh đã chọn
+        const selectedVideos = Array.from(selectedWrappers).map(wrapper => {
+            const img = wrapper.querySelector("img");
+            const index = parseInt(img.getAttribute("data-index"));
+            return videoSegments[index];
+        });
+
+        // Kiểm tra video data
+        if (!selectedVideos || selectedVideos.length === 0) {
+            throw new Error("Không có video data");
+        }
+
+        // Lấy thời gian countdown từ biến countdownTime
+        const countdownDuration = countdownTime;
+
+        // Ghép video với khung
+        const mergedVideoUrl = await mergeVideoWithFrame(selectedVideos[0], selectedFrameUrl, countdownDuration);
+
+        // Tạo video container
+        const videoContainer = document.createElement('div');
+        videoContainer.style.position = 'fixed';
+        videoContainer.style.top = '0';
+        videoContainer.style.left = '0';
+        videoContainer.style.width = '100%';
+        videoContainer.style.height = '100%';
+        videoContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        videoContainer.style.display = 'flex';
+        videoContainer.style.flexDirection = 'column';
+        videoContainer.style.justifyContent = 'center';
+        videoContainer.style.alignItems = 'center';
+        videoContainer.style.zIndex = '1000';
+
+        // Tạo video element
+        const videoElement = document.createElement('video');
+        videoElement.style.width = '500px';
+        videoElement.style.height = '350px';
+        videoElement.style.objectFit = 'cover';
+        videoElement.style.borderRadius = '20px';
+        videoElement.controls = true;
+        videoElement.autoplay = true;
+        videoElement.src = mergedVideoUrl;
+
+        // Tạo nút tải xuống
+        const downloadBtn = document.createElement('button');
+        downloadBtn.textContent = 'Tải video';
+        downloadBtn.style.marginTop = '20px';
+        downloadBtn.style.padding = '10px 20px';
+        downloadBtn.style.backgroundColor = '#ff6b6b';
+        downloadBtn.style.color = 'white';
+        downloadBtn.style.border = 'none';
+        downloadBtn.style.borderRadius = '5px';
+        downloadBtn.style.cursor = 'pointer';
+
+        // Tạo nút đóng
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Đóng';
+        closeBtn.style.position = 'absolute';
+        closeBtn.style.top = '20px';
+        closeBtn.style.right = '20px';
+        closeBtn.style.padding = '10px 20px';
+        closeBtn.style.backgroundColor = '#ff6b6b';
+        closeBtn.style.color = 'white';
+        closeBtn.style.border = 'none';
+        closeBtn.style.borderRadius = '5px';
+        closeBtn.style.cursor = 'pointer';
+
+        // Thêm các phần tử vào container
+        videoContainer.appendChild(videoElement);
+        videoContainer.appendChild(downloadBtn);
+        videoContainer.appendChild(closeBtn);
+        document.body.appendChild(videoContainer);
+
+        // Xử lý sự kiện tải xuống
+        downloadBtn.addEventListener('click', () => {
+          const a = document.createElement('a');
+          a.href = mergedVideoUrl;
+          a.download = 'video.webm';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+
+        // Xử lý sự kiện đóng
+        closeBtn.addEventListener('click', () => {
+          document.body.removeChild(videoContainer);
+        });
+        
+        hideSpinner();
+    } catch (error) {
+        hideSpinner();
+        console.error("Lỗi khi xử lý video:", error);
+        alert("Có lỗi xảy ra khi xử lý video: " + error.message);
+    }
 });
 
 // Thêm hàm kiểm tra đăng ký TikTok
